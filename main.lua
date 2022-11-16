@@ -26,4 +26,16 @@ function love.update(dt)
         player.x = player.x + math.cos(player.angle) * dt * player.speed * 10
         player.y = player.y + math.sin(player.angle) * dt * player.speed * 10
     end 
+
+    if player.x < 0 then 
+        player.x = love.graphics.getWidth()
+    elseif player.x > love.graphics.getWidth() then 
+        player.x = 0
+    end 
+
+    if player.y < 0 then 
+        player.y = love.graphics.getHeight()
+    elseif player.y > love.graphics.getHeight() then 
+        player.y = 0
+    end
 end
