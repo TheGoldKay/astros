@@ -1,5 +1,8 @@
+Player = require('player')
 
 function love.load()
+    x, y, angle = love.graphics.getWidth()/2, love.graphics.getHeight()/2, math.pi/4
+    player = Player:new("fill", x, y, 40, 20 , angle)
 end 
 
 function love.keypressed(key)
@@ -8,15 +11,24 @@ function love.keypressed(key)
     end 
 end 
 
-function triangle (mode, x, y, length, width , angle) -- position, length, width and angle
-	love.graphics.push()
-	love.graphics.translate(x, y)
-	love.graphics.rotate( angle )
-	love.graphics.polygon(mode, -length/2, -width /2, -length/2, width /2, length/2, 0)
-	love.graphics.pop() 
-end
-
 function love.draw()
-    x, y, angle = 200, 100, math.pi/4
-    triangle ("fill", x, y, 20, 10 , angle)
+    player:draw()
 end 
+
+function love.update(dt)
+    if love.keyboard.isDown('a', 'left') then 
+        player.angle = player.angle - player.speed * dt 
+    elseif love.keyboard.isDown('d', 'right') then 
+        player.angle = player.angle + player.speed * dt 
+    end 
+
+    local cosa, sina = math.cos(angle), math.sin(angle)
+    local dx1, dy1 = player.width*cosa,   player.width*sina
+	local dx2, dy2 = -player.length*sina, player.length*cosa
+
+    if love.keyboard.isDown('up', 'w') then 
+        player.x = player.x + dx1 
+        player.y = player.y + dy1 
+    end 
+
+end
