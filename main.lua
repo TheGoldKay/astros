@@ -22,13 +22,8 @@ function love.update(dt)
         player.angle = player.angle + player.speed * dt 
     end 
 
-    local cosa, sina = math.cos(angle), math.sin(angle)
-    local dx1, dy1 = player.width*cosa,   player.width*sina
-	local dx2, dy2 = -player.length*sina, player.length*cosa
-
     if love.keyboard.isDown('up', 'w') then 
-        player.x = player.x + dx1 
-        player.y = player.y + dy1 
+        player.x = player.x + math.cos(player.angle) * dt * player.speed * 10
+        player.y = player.y + math.sin(player.angle) * dt * player.speed * 10
     end 
-
 end
