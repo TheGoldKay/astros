@@ -8,7 +8,9 @@ end
 function love.keypressed(key)
     if key == 'escape' then 
         love.event.quit()
-    end 
+    elseif key == 'space' then 
+        player:fire()
+    end
 end 
 
 function love.draw()
@@ -38,4 +40,6 @@ function love.update(dt)
     elseif player.y > love.graphics.getHeight() then 
         player.y = 0
     end
+
+    player:bulletMove(dt)
 end
