@@ -7,6 +7,8 @@ function Enemy:new()
     self.rmax = 50
     self.xvel = 30
     self.yvel = 30
+    self.timer = 0
+    self.clock = .1
     self.list = {}
     self:create()
     return self
@@ -19,6 +21,19 @@ function Enemy:create()
     local a = love.math.random(0, math.pi * 2)
     table.insert(self.list, {r=r, x=x, y=y, a=a})
 end
+
+function Enemy:collideCheck()
+    for i , v1 in pairs(self.list) do 
+        for j, v2 in pairs(player.bullets) do 
+            root = math.sqrt(math.pow(math.abs(v1.x - v2.x), 2) + math.pow(math.abs(v1.y - v2.y), 2))
+            if root < v1.r + v2.r then 
+                self.list[i] = nil 
+                player.bullets[j] = nil 
+                
+            end 
+        end
+    end
+end 
 
 function Enemy:move(dt) 
     for i, c in ipairs(self.list) do 

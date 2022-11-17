@@ -11,8 +11,7 @@ function love.keypressed(key)
     if key == 'escape' then 
         love.event.quit()
     elseif key == 'space' then 
-        --player:fire()
-        enemy:create()
+        player:fire()
     end
 end 
 
@@ -46,4 +45,10 @@ function love.update(dt)
     end
     enemy:move(dt)
     player:bulletMove(dt)
+    enemy.timer = enemy.timer + dt 
+    if enemy.timer > enemy.clock then 
+        enemy.timer = 0
+        enemy:create()
+    end 
+    enemy:collideCheck()
 end
