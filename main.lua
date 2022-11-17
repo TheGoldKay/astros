@@ -44,6 +44,6 @@ function love.update(dt)
     elseif player.y > love.graphics.getHeight() then 
         player.y = 0
     end
-
+    enemy:move(dt)
     player:bulletMove(dt)
 end
