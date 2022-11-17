@@ -26,8 +26,8 @@ end
 
 function Player:bulletMove(dt)
     for i, b in pairs(self.bullets) do 
-        b.x = b.x + math.cos(b.a) * dt * self.speed * 20
-        b.y = b.y + math.sin(b.a) * dt * self.speed * 20
+        b.x = b.x + math.cos(b.a) * dt * self.speed * 50
+        b.y = b.y + math.sin(b.a) * dt * self.speed * 50
         if b.x < 0 or b.x > love.graphics.getWidth() or b.y < 0 or b.y > love.graphics.getHeight() then
             self.bullets[i] = nil 
         end

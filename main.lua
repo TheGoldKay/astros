@@ -1,20 +1,24 @@
 Player = require('player')
+Enemy = require('enemy')
 
 function love.load()
     x, y, angle = love.graphics.getWidth()/2, love.graphics.getHeight()/2, math.pi/4
     player = Player:new("fill", x, y, 40, 20 , angle)
+    enemy = Enemy:new()
 end 
 
 function love.keypressed(key)
     if key == 'escape' then 
         love.event.quit()
     elseif key == 'space' then 
-        player:fire()
+        --player:fire()
+        enemy:create()
     end
 end 
 
 function love.draw()
     player:draw()
+    enemy:draw()
 end 
 
 function love.update(dt)
